@@ -17,12 +17,7 @@ const ENTITY_HINTS = [
   ["payment", "Payment"],
 ];
 
-/**
- * Deterministic fallback analyzer used when no ANTHROPIC_API_KEY is configured.
- * It's a real keyword/rule-based parser (not a fabricated result) — it reads the
- * actual requirement text and derives entities/endpoints from it. Less flexible
- * than an LLM, but honest about what it is.
- */
+
 function heuristicAnalyze(requirement) {
   const lower = requirement.toLowerCase();
   const needsAuth = /auth|login|regist|jwt|password|user account|sign ?up|sign ?in/.test(lower);
