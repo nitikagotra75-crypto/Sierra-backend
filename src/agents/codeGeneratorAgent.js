@@ -29,9 +29,6 @@ function jestConfig() {
   );
 }
 
-/**
- * Generates the full backend project as a { relativePath: contentString } map.
- */
 function generateProject({ projectName, analysis }) {
   const { needsAuth, primaryEntities } = analysis;
   const files = {};
