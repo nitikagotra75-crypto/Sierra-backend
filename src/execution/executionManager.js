@@ -37,11 +37,6 @@ function runCommand(cmd, args, { cwd, env, timeoutMs = 120000 }) {
   });
 }
 
-/**
- * Checks whether a real Docker daemon is reachable. If dockerode can't connect
- * (e.g. no daemon/socket, as in this build sandbox), we honestly fall back to
- * a restricted child_process sandbox instead of pretending Docker ran.
- */
 async function dockerAvailable() {
   try {
     const Docker = require("dockerode");
@@ -55,8 +50,7 @@ async function dockerAvailable() {
 
 /**
  * Installs dependencies for the generated project. Real `npm install`, always —
- * this step doesn't depend on Docker availability.
- */
+ * this step doesn't depend on Dock
 async function installDependencies(workspacePath, onLog) {
   onLog && onLog("Running npm install...");
   const result = await runCommand("npm", ["install", "--prefer-offline", "--no-audit", "--no-fund"], {
