@@ -61,15 +61,6 @@ async function installDependencies(workspacePath, onLog) {
   return result;
 }
 
-/**
- * Starts the generated backend and waits for /health to respond.
- * Uses Docker when available; otherwise a real child_process, isolated by:
- * - a dedicated temp workspace directory (not the host project tree)
- * - a minimal explicit environment (no inherited secrets beyond what's passed)
- * - a hard startup timeout with guaranteed process kill
- * This is a genuine functional substitute for Docker in this sandbox, clearly
- * labeled as such, not a simulation of a run that didn't happen.
- */
 async function startBackend({ workspacePath, envVars, dockerMode }) {
   const port = await getPort({ port: getPort.makeRange(4100, 4999) });
   const runtimeEnv = {
